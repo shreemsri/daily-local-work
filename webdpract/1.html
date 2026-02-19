@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Email & Phone Validation</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    .error { color: red; font-size: 14px; }
+    .success { color: green; font-size: 14px; }
+    input { margin-bottom: 8px; padding: 6px; width: 250px; display: block; }
+    label { margin-top: 10px; display: block; }
+  </style>
+</head>
+<body>
+
+  <h2>Email & Phone Number Validation</h2>
+
+  <form onsubmit="return validateForm()">
+    <!-- Email -->
+    <label for="email">Email:</label>
+    <input type="text" id="email">
+    <span id="emailError" class="error"></span>
+
+    <!-- Phone -->
+    <label for="phone">Phone Number:</label>
+    <input type="text" id="phone" placeholder="e.g. 9876543210">
+    <span id="phoneError" class="error"></span>
+
+    <br>
+    <button type="submit">Submit</button>
+    <p id="formMessage" class="success"></p>
+  </form>
+
+  <script>
+    function validateForm() {
+      let email = document.getElementById("email").value.trim();
+      let phone = document.getElementById("phone").value.trim();
+
+      let emailError = document.getElementById("emailError");
+      let phoneError = document.getElementById("phoneError");
+      let formMessage = document.getElementById("formMessage");
+
+      // Clear old messages
+      emailError.textContent = "";
+      phoneError.textContent = "";
+      formMessage.textContent = "";
+
+      let isValid = true;
+
+      // ----- Email Validation -----
+      // Basic email pattern
+      let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$/;
+
+      if (email === "") {
+        emailError.textContent = "Email is required.";
+        isValid = false;
+      } else if (!emailPattern.test(email)) {
+        emailError.textContent = "Please enter a valid email address.";
+        isValid = false;
+      }
+
+      // ----- Phone Validation -----
+      // Example: Indian 10-digit mobile number (starting 6–9)
+      let phonePattern = /^[6-9]\d{9}$/;
+
+      if (phone === "") {
+        phoneError.textContent = "Phone number is required.";
+        isValid = false;
+      } else if (!phonePattern.test(phone)) {
+        phoneError.textContent = "Enter a valid 10-digit mobile number.";
+        isValid = false;
+      }
+
+      if (isValid) {
+        formMessage.textContent = "Form submitted successfully!";
+      }
+
+      return isValid; // prevent submit if not valid
+    }
+  </script>
+
+</body>
+</html>

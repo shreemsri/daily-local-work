@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration - Online Book Store</title>
+</head>
+<body>
+
+    <header>
+        <img src="https://dreieck.com/en/wp-content/uploads/sites/2/2023/03/opened-book-07-filling-the-outline-850x638.png" alt="Online Book Store Logo" width="150">
+        <h1>Online Book Store</h1>
+    </header>
+    <hr>
+
+   <nav>
+        <a href="index.html">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="login.html">Login</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="register.html">Registration</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="cse.html">Catalogue</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="cart.html">Cart</a>
+    </nav>
+    <hr>
+
+    <main>
+        <table border="3" width="100%" cellspacing="0" cellpadding="10">
+            <tr>
+                <td valign="top" width="20%" rowspan="4">
+                    <nav>
+                        <ul>
+                            <li><a href="cse.html">CSE</a></li><hr>
+                            <li><a href="ece.html">ECE</a></li><hr>
+                            <li><a href="eee.html">EEE</a></li><hr>
+                            <li><a href="civil.html">CIVIL</a></li><hr>
+                        </ul>
+                    </nav>
+                </td>
+
+                <td valign="top">
+                    <center><h2>Registration Page</h2></center>
+                    <center><form>
+                        <table>
+                            <tr>
+                                <td><label for="fullname">Full Name:</label></td>
+                                <td><input type="text" id="fullname" name="fullname" placeholder="Enter Username"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="password">Password:</label></td>
+                                <td><input type="password" id="password" name="password" placeholder="Enter Password"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="email">Email:</label></td>
+                                <td><input type="email" id="email" name="email" placeholder="Enter Email"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="mobile">Mobile No:</label></td>
+                                <td><input type="tel" id="mobile" name="mobile" placeholder="Enter Mobile"></td>
+                            </tr>
+                            <tr>
+                                <td>Gender:</td>
+                                <td>
+                                    <input type="radio" id="male" name="gender" value="male">
+                                    <label for="male">Male</label>
+                                    <input type="radio" id="female" name="gender" value="female">
+                                    <label for="female">Female</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Date of Birth:</td>
+                                <td>
+                                    <select name="day">
+                                        <option>DD</option>
+                                        </select>
+                                    <select name="month">
+                                        <option>MM</option>
+                                        </select>
+                                    <select name="year">
+                                        <option>YYYY</option>
+                                        </select>
+                                </td>
+                            </tr>
+                             <tr>
+                                <td valign="top">Known Languages:</td>
+                                <td>
+                                    <input type="checkbox" id="english" name="lang" value="english">
+                                    <label for="english">English</label>
+                                    <input type="checkbox" id="telugu" name="lang" value="telugu">
+                                    <label for="telugu">Telugu</label>
+                                    <input type="checkbox" id="hindi" name="lang" value="hindi">
+                                    <label for="hindi">Hindi</label>
+                                    <input type="checkbox" id="tamil" name="lang" value="tamil">
+                                    <label for="tamil">Tamil</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td valign="top"><label for="address">Address:</label></td>
+                                <td><textarea id="address" name="address" rows="5" cols="30"></textarea></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <input type="submit" value="Submit">
+                                    <input type="reset" value="Reset">
+                                </td>
+                            </tr>
+                        </table>
+                    </form></center>
+                </td>
+            </tr>
+        </table>
+    </main>
+
+</body>
+</html>

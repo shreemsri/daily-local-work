@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ChatLive – A Real-Time Web Chat Application</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils/css/default.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils/css/snap.min.css">
+  <style>
+    header{text-align:center;}
+  </style>
+</head>
+<body>
+
+<h1 style="text-align:center;">ChatLive – A Real-Time Web Chat Application</h1>
+<h3 style="text-align:center;">B.Tech CSE Project</h3>
+<p style="text-align:center;">Team: 3 Members &middot; Department of Computer Science and Engineering</p>
+
+<hr>
+
+<h2>Project Overview</h2>
+<ul>
+  <li>ChatLive is a full-stack real-time web chat application for instant text communication between authenticated users.</li>
+  <li>It supports multiple chat rooms, real-time updates, and a responsive web interface suitable for academic and practical use.</li>
+</ul>
+
+<hr>
+
+<h2>Problem Statement</h2>
+<ul>
+  <li>Traditional communication tools are often heavy, complex, or not tailored for small academic teams and classroom use.</li>
+  <li>There is a need for a lightweight, secure, browser-based real-time chat system that demonstrates full-stack development concepts.</li>
+</ul>
+
+<hr>
+
+<h2>Objectives</h2>
+<ul>
+  <li>Design and implement a real-time chat application with support for multiple rooms and authenticated users.</li>
+  <li>Apply modern full-stack technologies to build a scalable, cloud-deployed web application.</li>
+  <li>Demonstrate clean architecture, secure authentication, and robust error handling.</li>
+</ul>
+
+<hr>
+
+<h2>Technologies Used</h2>
+<ul>
+  <li><strong>Frontend:</strong> React.js, responsive UI with light/dark theme support.</li>
+  <li><strong>Backend:</strong> Node.js with Express.js and Socket.IO for real-time messaging.</li>
+  <li><strong>Authentication:</strong> Firebase Authentication (email/password and Google OAuth).</li>
+  <li><strong>Deployment:</strong> Frontend on Vercel CDN, backend on Render cloud platform.</li>
+</ul>
+
+<hr>
+
+<h2>System Architecture</h2>
+<ul>
+  <li>Three-tier architecture with presentation layer (React), application layer (Node/Express/Socket.IO), and authentication layer (Firebase).</li>
+  <li>WebSocket-based communication channel for low-latency, bidirectional messaging between clients and server.</li>
+</ul>
+
+<hr>
+
+<h2>Key Features</h2>
+<ul>
+  <li>Real-time messaging with latency less than one second for typical network conditions.</li>
+  <li>Multiple chat rooms with independent user sessions and optional password protection.</li>
+  <li>Online users list, typing indicators, and persistent state using localStorage.</li>
+  <li>Responsive UI supporting both desktop and mobile browsers with theme toggle.</li>
+</ul>
+
+<hr>
+
+<h2>Security and Authentication</h2>
+<ul>
+  <li>Firebase Authentication manages user sessions using secure tokens and trusted providers.</li>
+  <li>Server-side validation on all incoming events to prevent unauthorized access or malformed data.</li>
+  <li>CORS configuration to allow only trusted frontend origins to communicate with the backend.</li>
+</ul>
+
+<hr>
+
+<h2>Implementation Highlights</h2>
+<ul>
+  <li>Socket.IO channels for room join, leave, message broadcast, and user status updates.</li>
+  <li>Clean separation of concerns: UI components, API services, and real-time handlers.</li>
+  <li>Timezone-aware timestamps for messages and robust reconnection logic on network interruptions.</li>
+</ul>
+
+<hr>
+
+<h2>Testing and Results</h2>
+<ul>
+  <li>Functional testing of message delivery, room switching, login/logout, and error cases.</li>
+  <li>Performance tests show stable messaging with sub-second latency under typical classroom loads.</li>
+  <li>Cross-browser testing across major browsers to ensure compatibility and responsiveness.</li>
+</ul>
+
+<hr>
+
+<h2>Conclusion</h2>
+<ul>
+  <li>ChatLive successfully demonstrates a production-like real-time web chat system built with modern full-stack technologies.</li>
+  <li>The project provides a strong learning experience in web sockets, authentication, cloud deployment, and scalable UI design.</li>
+</ul>
+
+<hr>
+
+<h2>Future Enhancements</h2>
+<ul>
+  <li>Add message persistence with a database to support chat history and search.</li>
+  <li>Introduce file sharing, emojis, and image previews inside chat rooms.</li>
+  <li>Implement admin controls for room management, moderation, and analytics

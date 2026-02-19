@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+Date of Birth: <input type="date" id="dob"><br>
+<button onclick="showAge()">Show Age</button>
+<p id="age"></p>
+
+<script>
+function showAge() {
+  var birth = new Date(document.getElementById("dob").value);
+  var now = new Date();
+  var age = now.getFullYear() - birth.getFullYear();
+  if (now < new Date(now.getFullYear(), birth.getMonth(), birth.getDate())) age--;
+  document.getElementById("age").innerText = "Age: " + age;
+}
+</script>
+</body>
+</html>

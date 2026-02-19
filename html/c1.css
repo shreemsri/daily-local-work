@@ -1,0 +1,18 @@
+.container{
+    height: 320px;
+    width: 320px;
+    background-color: rgb(27, 229, 31);
+    display: grid;
+    grid-template-rows: 130px 130px;
+    grid-template-columns: 130px 130px;
+    row-gap: 50px;
+    column-gap: 50px;
+    justify-self: center;
+    place-items: center center;
+}
+.item{
+    height: 70px;
+    width: 70px;
+    background-color: black;
+    margin: 10px;
+}

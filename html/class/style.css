@@ -1,0 +1,295 @@
+/* ========================================
+   1. Global Styles (For the whole page)
+   ======================================== */
+
+body {
+    font-family: Arial, sans-serif; /* Use a very common font */
+    background-color: #121212; /* Dark background */
+    color: #ffffff;            /* White text */
+    margin: 0; /* Remove default browser margin */
+    padding: 0; /* Remove default browser padding */
+}
+
+/* All sections (like Home, About, etc.) */
+section {
+    padding: 60px 20px; /* 60px space on top/bottom, 20px on left/right */
+    
+    /* This centers all the content in the middle of the page */
+    max-width: 1200px;
+    margin: 0 auto; /* 0 margin on top/bottom, 'auto' on left/right centers it */
+}
+
+/* Headings */
+h1, h2, h3 {
+    font-family: 'Poppins', sans-serif; /* Make headings use the Google Font */
+    color: #007bff; /* Blue color for headings */
+}
+
+h2 {
+    font-size: 36px;
+    text-align: center; /* Center all section titles */
+    margin-bottom: 40px;
+}
+
+/* Paragraph text */
+p {
+    color: #aaaaaa; /* Light gray text */
+    margin-bottom: 15px;
+}
+
+/* Links */
+a {
+    color: #007bff; /* Blue color */
+    text-decoration: none; /* Remove underline */
+}
+
+a:hover {
+    color: #0056b3; /* Darker blue when you mouse over */
+}
+
+/* ========================================
+   2. Header & Navigation Bar
+   ======================================== */
+
+header {
+    background-color: #1e1e1e; /* A slightly lighter dark color */
+    padding: 20px;
+}
+
+nav {
+    /* This puts the logo on the left and links on the right */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    /* Center the nav bar content (matches the 'section' centering) */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo a {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff; /* White text for logo */
+}
+
+.nav-links {
+    display: flex; /* Put nav items in a row */
+    list-style: none; /* Remove bullet points */
+}
+
+.nav-links li {
+    margin-left: 30px; /* Space between each link */
+}
+
+.nav-links a {
+    color: #ffffff;
+}
+
+/* ========================================
+   3. Home Section (The top section)
+   ======================================== */
+
+.hero {
+    text-align: center; /* Center all the text and the image */
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    /* This is a square image. No rounded corners for simplicity. */
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    color: #ffffff;
+}
+
+.hero .tagline {
+    font-size: 20px;
+    color: #aaaaaa;
+    margin-bottom: 30px;
+}
+
+/* Re-usable button class */
+.btn {
+    display: inline-block;
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 12px 24px;
+    cursor: pointer; /* Show a hand cursor */
+    font-weight: 600; /* Make text bold */
+}
+
+.btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* ========================================
+   4. About Me Section
+   ======================================== */
+
+#about {
+    background-color: #1e1e1e; /* Lighter background */
+}
+
+.about-text {
+    max-width: 800px;
+    margin: 0 auto; /* Center the text block */
+    text-align: center;
+    font-size: 18px;
+}
+
+/* ========================================
+   5. Skills Section
+   ======================================== */
+
+.skills-container {
+    text-align: center; /* Center all the skill items */
+}
+
+.skill-item {
+    display: inline-block; /* Put skills side-by-side */
+    background-color: #1e1e1e;
+    color: #ffffff;
+    padding: 12px 24px;
+    margin: 10px; /* Space around each skill */
+    font-weight: 600;
+}
+
+/* ========================================
+   6. Projects Section
+   ======================================== */
+
+#projects {
+    background-color: #1e1e1e;
+}
+
+.projects-container {
+    text-align: center; /* Center the project cards */
+}
+
+.project-card {
+    display: inline-block; /* Put project cards side-by-side */
+    width: 400px;
+    background-color: #121212; /* Darker background for the card */
+    margin: 20px;
+    text-align: left; /* Make text inside the card align left */
+    vertical-align: top; /* Makes cards line up at the top */
+}
+
+.project-card img {
+    width: 100%; /* Make image fill the card's width */
+    height: auto; /* Height adjusts automatically to keep proportions */
+}
+
+.project-content {
+    padding: 25px; /* Space inside the card, below the image */
+}
+
+.project-content h3 {
+    font-size: 24px;
+}
+
+/* Button for projects */
+.btn-project {
+    display: inline-block;
+    color: #007bff;
+    padding: 8px 16px;
+    border: 1px solid #007bff; /* Blue border */
+    margin-top: 15px;
+    font-weight: 600;
+}
+
+.btn-project:hover {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+/* ========================================
+   7. Contact Section
+   ======================================== */
+
+.contact-container {
+    max-width: 800px; /* Make the contact area narrower */
+    margin: 0 auto; /* Center it */
+}
+
+.contact-info {
+    text-align: center;
+    margin-bottom: 40px; /* Space between info and form */
+}
+
+.form-group {
+    margin-bottom: 20px; /* Space between each form field */
+}
+
+.form-group label {
+    display: block; /* Put the label on its own line */
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+/* Style for text boxes and the message area */
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border: none;
+}
+
+/* Make the "Send Message" button full-width */
+.contact-form .btn {
+    width: 100%;
+}
+
+
+/* ========================================
+   8. Footer
+   ======================================== */
+
+footer {
+    text-align: center;
+    padding: 30px;
+    background-color: #1e1e1e;
+    margin-top: 60px;
+    color: #aaaaaa;
+}
+
+/* ========================================
+   9. Responsive Design (For Mobile)
+   ======================================== 
+   This code only runs on screens 768px wide or smaller.
+*/
+
+@media (max-width: 768px) {
+    
+    /* On mobile, stack the nav links */
+    nav {
+        flex-direction: column; /* Stack logo and links */
+    }
+
+    .nav-links {
+        flex-direction: column;
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    .nav-links li {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+    /* On mobile, make project cards full-width */
+    .project-card {
+        display: block; /* Makes it take 100% width */
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}

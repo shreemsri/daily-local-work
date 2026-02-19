@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ultimate Birthday Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Indie+Flower&family=Nunito:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <style>
+        :root {
+            --bg-color: #1a1a2e;
+            --primary: #ff6b6b;
+            --secondary: #4ecdc4;
+            --accent: #ffe66d;
+            --glass: rgba(255, 255, 255, 0.1);
+            --border: rgba(255, 255, 255, 0.2);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: radial-gradient(circle at center, #2e2a4d 0%, #1a1a2e 100%);
+            color: white;
+            height: 100vh;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        /* --- SECTIONS --- */
+        section {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            transition: all 0.8s ease-in-out;
+            padding: 20px;
+        }
+
+        .hidden { opacity: 0; pointer-events: none; transform: scale(1.1); }
+
+        /* --- BUTTONS --- */
+        .nav-btn {
+            margin-top: 30px;
+            background: white; color: var(--bg-color);
+            padding: 10px 30px; border-radius: 30px; border: none;
+            font-family: 'Fredoka One'; font-size: 1.2rem;
+            cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.2s; z-index: 100;
+        }
+        .nav-btn:hover { transform: scale(1.05); }
+
+        /* --- PHASE 1: COUNTDOWN --- */
+        .countdown-box {
+            display: flex; gap: 15px;
+            background: var(--glass); padding: 2rem;
+            border-radius: 20px; backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            box-shadow: 0 0 20px rgba(255,107,107, 0.3);
+        }
+        .time-item { text-align: center; }
+        .time-val { font-family: 'Fredoka One'; font-size: 3rem; color: var(--primary); }
+        .time-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; }
+
+        /* --- PHASE 2: QUESTIONNAIRE --- */
+        .question-card {
+            background: white; color: #333; padding: 3rem;
+            border-radius: 30px; text-align: center;
+            max-width: 500px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        .btn-group { margin-top: 2rem; display: flex; justify-content: center; gap: 20px; }
+        .btn {
+            padding: 12px 30px; border: none; border-radius: 50px;
+            font-family: 'Fredoka One'; font-size: 1.2rem;
+            cursor: pointer; transition: transform 0.2s;
+        }
+        .btn-yes { background: var(--secondary); color: white; box-shadow: 0 5px 0 #3dbbb3; }
+        .btn-yes:active { transform: translateY(5px); box-shadow: none; }
+        .btn-no { background: var(--primary); color: white; position: relative; }
+
+        /* --- PHASE 3: IMPACT --- */
+        .impact-text {
+            font-family: 'Fredoka One'; font-size: 12rem;
+            color: var(--accent); text-shadow: 0 0 30px var(--accent);
+            animation: shake 0.5s infinite;
+        }
+
+        /* --- PHASE 4: GIFT (IMAGE) --- */
+        .gift-wrapper { cursor: pointer; transition: transform 0.2s; }
+        .gift-wrapper:hover { transform: scale(1.05); }
+        .gift-emoji {
+            width: 220px; height: auto;
+            animation: bounce 2s infinite ease-in-out;
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.3));
+        }
+
+        /* --- PHASE 5: COMPLIMENTS --- */
+        .big-heart {
+            font-size: 8rem; cursor: pointer;
+            transition: transform 0.1s;
+            animation: heartbeat 1.5s infinite;
+            filter: drop-shadow(0 0 20px rgba(255, 107, 107, 0.5));
+        }
+        .big-heart:active { transform: scale(0.9); }
+        #compliment-text {
+            font-family: 'Fredoka One', cursive; font-size: 2rem;
+            color: var(--accent); margin-top: 30px;
+            text-shadow: 2px 2px 0 #000; height: 60px;
+        }
+
+        /* --- PHASE 6: CAKE --- */
+        .cake-container { position: relative; margin-top: 50px; transform: scale(1.5); }
+        .cake {
+            width: 250px; height: 100px;
+            background: #f0e4d0; border-radius: 10px 10px 0 0;
+            position: relative; box-shadow: 0 5px 0 #e0d4c0 inset;
+        }
+        .cake::after {
+            content: ''; position: absolute; bottom: -50px; left: -10px;
+            width: 270px; height: 60px; background: #6d4c41; border-radius: 5px;
+        }
+        .icing {
+            position: absolute; top: 0; width: 100%; height: 30px;
+            background: #ff6b6b; border-radius: 10px 10px 0 0;
+        }
+        .icing::before {
+            content: ''; position: absolute; bottom: -15px;
+            width: 100%; height: 20px;
+            background: radial-gradient(circle, #ff6b6b 10px, transparent 11px);
+            background-size: 20px 20px;
+        }
+        .candle {
+            position: absolute; top: -40px; width: 15px; height: 40px;
+            background: repeating-linear-gradient(45deg, #fff, #fff 5px, #4ecdc4 5px, #4ecdc4 10px);
+            left: 50%; transform: translateX(-50%); border-radius: 3px;
+        }
+        .flame {
+            position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
+            width: 15px; height: 20px; background: #ff9800;
+            border-radius: 50% 50% 20% 20%;
+            animation: flicker 0.5s infinite alternate;
+            cursor: pointer; box-shadow: 0 0 20px #ff9800;
+        }
+        .flame.out { opacity: 0; animation: none; cursor: default; }
+
+        /* --- PHASE 7: FINALE --- */
+        #p7 { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%); overflow: hidden; }
+        .final-title {
+            font-family: 'Pacifico', cursive; font-size: 5rem;
+            color: #fff; text-shadow: 2px 2px 0px #ff6b6b;
+            animation: bounceText 2s infinite; z-index: 2; text-align: center;
+        }
+        .final-msg {
+            background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(10px);
+            padding: 2rem; border-radius: 20px; margin-top: 2rem;
+            font-family: 'Nunito', sans-serif; font-size: 1.5rem;
+            color: #d63384; max-width: 600px; text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform: translateY(20px); opacity: 0;
+            animation: slideUp 1s ease forwards 0.5s; z-index: 2;
+        }
+        
+        .balloon {
+            position: absolute; bottom: -100px; width: 50px; height: 60px;
+            background: red; border-radius: 50%;
+            animation: floatUp 10s linear infinite; z-index: 1;
+        }
+        .balloon::before {
+            content: ''; position: absolute; bottom: -10px; left: 50%;
+            transform: translateX(-50%);
+            border-left: 5px solid transparent; border-right: 5px solid transparent;
+            border-bottom: 10px solid red;
+        }
+
+        /* --- PHASE 8: COUPONS --- */
+        #p8 { background: #2c3e50; overflow-y: auto; padding-bottom: 150px; }
+        .wallet-grid {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;
+            margin-top: 30px; 
+        }
+        .ticket {
+            background: #fffbe7; color: #333;
+            width: 250px; padding: 20px;
+            border-radius: 10px; position: relative;
+            border: 2px dashed #999;
+            cursor: pointer; transition: transform 0.3s, box-shadow 0.3s;
+            font-family: 'Courier New', monospace;
+        }
+        .ticket:hover { transform: translateY(-5px); }
+        .ticket.selected {
+            border: 3px solid #4ecdc4;
+            box-shadow: 0 0 15px #4ecdc4;
+            transform: scale(1.05);
+            background: #fff;
+        }
+        .ticket.selected::after {
+            content: 'SELECTED'; position: absolute;
+            top: 10px; right: 10px;
+            color: #4ecdc4; font-weight: bold; font-size: 0.8rem;
+            border: 2px solid #4ecdc4; padding: 2px 5px; border-radius: 5px;
+        }
+        .ticket-title { font-weight: bold; margin-bottom: 10px; font-size: 1.2rem; }
+        .ticket-sub { font-size: 0.8rem; color: #666; }
+
+        .action-bar {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            z-index: 200; display: flex; flex-direction: column; gap: 10px; align-items: center;
+        }
+        .share-btn {
+            background: #ff6b6b; color: white;
+            padding: 15px 40px; border-radius: 50px;
+            font-family: 'Fredoka One'; font-size: 1.5rem;
+            border: none; cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            animation: bounce 2s infinite;
+        }
+        .finish-btn {
+            background: transparent; color: #aaa; border: 1px solid #aaa;
+            padding: 8px 20px; border-radius: 20px; cursor: pointer;
+            font-size: 0.9rem; transition: all 0.2s;
+        }
+        .finish-btn:hover { background: white; color: #333; }
+
+        /* --- PHASE 9: HAPPY BIRTHDAY AGAIN --- */
+        #p9 {
+            background: #ffd1dc; /* Pastel Pink */
+            color: #d63384;
+            text-align: center;
+        }
+        .cute-char {
+            width: 200px; height: auto;
+            animation: bounce 1.5s infinite ease-in-out;
+            margin-bottom: 20px;
+        }
+
+        /* Hidden container for image generation */
+        #capture-area {
+            position: fixed; top: -9999px; left: -9999px;
+            background: #2c3e50; padding: 40px;
+            display: flex; flex-direction: column; align-items: center; gap: 20px;
+            width: 600px; border-radius: 20px;
+        }
+
+        /* ANIMATIONS */
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        @keyframes shake { 0% { transform: translate(1px, 1px) rotate(0deg); } 10% { transform: translate(-1px, -2px) rotate(-1deg); } 20% { transform: translate(-3px, 0px) rotate(1deg); } 30% { transform: translate(3px, 2px) rotate(0deg); } 40% { transform: translate(1px, -1px) rotate(1deg); } 50% { transform: translate(-1px, 2px) rotate(-1deg); } 60% { transform: translate(-3px, 1px) rotate(0deg); } 70% { transform: translate(3px, 1px) rotate(-1deg); } 80% { transform: translate(-1px, -1px) rotate(1deg); } 90% { transform: translate(1px, 2px) rotate(0deg); } 100% { transform: translate(1px, -2px) rotate(-1deg); } }
+        @keyframes flicker { 0% { transform: translateX(-50%) scale(1); opacity: 1; } 100% { transform: translateX(-50%) scale(1.1); opacity: 0.8; } }
+        @keyframes bounceText { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+        @keyframes slideUp { to { transform: translateY(0); opacity: 1; } }
+        @keyframes floatUp { 0% { bottom: -100px; transform: translateX(0); } 100% { bottom: 120vh; transform: translateX(20px); } }
+        @keyframes heartbeat { 0% { transform: scale(1); } 15% { transform: scale(1.15); } 30% { transform: scale(1); } 45% { transform: scale(1.15); } 60% { transform: scale(1); } }
+
+    </style>
+</head>
+<body>
+
+    <audio id="sfx-boom" src="boom.mp3"></audio>
+    <audio id="sfx-cheer" src="cheer.mp3"></audio>
+    <audio id="bg-music" src="baddaycake.mp3" loop></audio>
+
+    <section id="p1">
+        <h2 style="font-family: 'Fredoka One'; margin-bottom: 20px; color: var(--secondary);">Iske baad hoga dhamakaaa</h2>
+        <div class="countdown-box">
+            <div class="time-item"><div class="time-val" id="d">00</div><div class="time-label">Days</div></div>
+            <div class="time-item"><div class="time-val" id="h">00</div><div class="time-label">Hrs</div></div>
+            <div class="time-item"><div class="time-val" id="m">00</div><div class="time-label">Min</div></div>
+            <div class="time-item"><div class="time-val" id="s">00</div><div class="time-label">Sec</div></div>
+        </div>
+    </section>
+
+    <section id="p2" class="hidden">
+        <div class="question-card">
+            <h1 style="font-family: 'Fredoka One'; margin-bottom: 20px;">I made a little something...<br>Do you want to see?(not a question btw)</h1>
+            <div class="btn-group">
+                <button class="btn btn-yes" onclick="goPhase3()">YES!</button>
+                <button class="btn btn-no" id="no-btn" onmouseover="moveButton()">NO</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="p3" class="hidden">
+        <div class="impact-text" id="impact-count">3</div>
+        <h3 style="margin-top: 20px; letter-spacing: 5px;">BRACE FOR IMPACT</h3>
+    </section>
+
+    <section id="p4" class="hidden">
+        <div class="gift-wrapper" onclick="openGift()">
+            <img src="https://em-content.zobj.net/source/apple/354/wrapped-gift_1f381.png" alt="Cute Gift" class="gift-emoji">
+        </div>
+        <p style="margin-top: 50px; font-family: 'Indie Flower'; font-size: 1.5rem;">Tap to open ✨</p>
+    </section>
+
+    <section id="p5" class="hidden">
+        <h2 style="font-family: 'Indie Flower'; margin-bottom: 30px; font-size: 2rem;">Tap the heart...<br>if you dare 💗</h2>
+        <div class="heart-btn-container" onclick="showCompliment()">
+            <div class="big-heart">💗</div>
+        </div>
+        <div id="compliment-text" style="opacity:0; transition: all 0.5s ease;"></div>
+        <button id="next-level-btn" class="nav-btn hidden" style="margin-top: 50px;" onclick="goToCake()">
+            Okay, ab aage kaafi tareef hogyi! 🍰
+        </button>
+    </section>
+
+    <section id="p6" class="hidden">
+        <h1 style="font-family: 'Fredoka One'; font-size: 4rem; margin-bottom: 2rem;">Make a Wish!</h1>
+        <p style="margin-bottom: 2rem;" id="blow-instruction">Blow into your microphone 🎤<br></p>
+        <div class="cake-container">
+            <div class="candle">
+                <div class="flame" id="flame" onclick="blowCandle()"></div>
+            </div>
+            <div class="cake">
+                <div class="icing"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="p7" class="hidden">
+        <div id="balloons"></div>
+        <h1 class="final-title">Happy Birthday Moooo!</h1>
+        <div class="final-msg">
+            <p>Thoda please kalesh km krdo aur jeene do hme bhi. Baaki Happy bithdayyyyyy i cant write letters to.....  yahi aata h thoda bohot</p>
+            <br>
+            <p style="font-weight: bold;">Nacho Gao maze karo 🥂✨</p>
+            <button class="nav-btn" onclick="showCoupons()" style="background: #ff6b6b; color: white;">One last thing... 🎁</button>
+        </div>
+    </section>
+
+    <section id="p8" class="hidden">
+        <h1 style="font-family: 'Fredoka One'; margin-bottom: 10px; color: #f1c40f;">Your Birthday Wallet</h1>
+        <p>Select the tickets you want to redeem today!</p>
+        
+        <div class="wallet-grid">
+            <div class="ticket" onclick="toggleTicket(this)">
+                <div class="ticket-title">Ghummi Ghummi</div>
+                <div class="ticket-sub">Valid for one free ghummi ghummi and deep convo.</div>
+            </div>
+            <div class="ticket" onclick="toggleTicket(this)">
+                <div class="ticket-title">🎥 Movie Night</div>
+                <div class="ticket-sub">I pick the movie, you bring the popcorn.</div>
+            </div>
+            <div class="ticket" onclick="toggleTicket(this)">
+                <div class="ticket-title">Kalesh Cancel Ticket</div>
+                <div class="ticket-sub">ek kalesh maaf.</div>
+            </div>
+            <div class="ticket" onclick="toggleTicket(this)">
+                <div class="ticket-title">🍔 Food Treat</div>
+                <div class="ticket-sub">Jagah bhi aapka paise bhi aapke jb bulao im in.</div>
+            </div>
+        </div>
+
+        <div class="action-bar" id="action-bar">
+            <button class="share-btn hidden" id="share-btn" onclick="generateShareImage()">Let me know! 📤</button>
+            <button class="finish-btn" onclick="goFinalPage()">The End ❤️</button>
+        </div>
+    </section>
+
+    <section id="p9" class="hidden">
+        <h1 style="font-family: 'Fredoka One'; font-size: 3.5rem; color: #ff6b6b; margin-bottom: 20px;">Happieee Birthdayyyy Againnn Jaunda!</h1>
+        
+        <img src="photu.jpeg" alt="Cute Dance" class="cute-char">
+        
+        <p style="font-family: 'Indie Flower'; font-size: 1.5rem; color: #555; max-width: 500px;">
+            Have the most magical day ever. Partyyy hogi Partyyyyyyyyyyy! 🌟
+        </p>
+
+        <button class="nav-btn" style="margin-top: 40px; background: #4ecdc4;" onclick="replayExperience()">Replay? 🔄</button>
+    </section>
+
+    <div id="capture-area">
+        <h2 style="color: white; font-family: 'Fredoka One';">I'm Redeeming These! 🎉</h2>
+        <div id="selected-tickets-container" style="display: flex; flex-direction: column; gap: 15px;">
+            </div>
+    </div>
+
+    <script>
+        // --- CONFIGURATION ---
+        // Updated Target Date: Jan 12, 2026 00:00:00
+        const TEST_MODE = false; 
+        const TARGET_DATE = TEST_MODE ? new Date(new Date().getTime() + 2000) : new Date("2025-12-19T12:07:00");
+        let confettiActive = false; 
+        
+        // --- 1. COUNTDOWN ---
+        const timer = setInterval(() => {
+            const now = new Date().getTime();
+            const dist = TARGET_DATE - now;
+            if (dist < 0) {
+                clearInterval(timer);
+                switchPhase('p1', 'p2');
+                return;
+            }
+            document.getElementById('d').innerText = Math.floor(dist / (1000 * 60 * 60 * 24)).toString().padStart(2,'0');
+            document.getElementById('h').innerText = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2,'0');
+            document.getElementById('m').innerText = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2,'0');
+            document.getElementById('s').innerText = Math.floor((dist % (1000 * 60)) / 1000).toString().padStart(2,'0');
+        }, 1000);
+
+        // --- 2. RUNAWAY BUTTON ---
+        function moveButton() {
+            const btn = document.getElementById('no-btn');
+            const x = Math.random() * 200 - 100;
+            const y = Math.random() * 200 - 100;
+            btn.style.transform = `translate(${x}px, ${y}px)`;
+        }
+
+        function switchPhase(hideId, showId) {
+            document.getElementById(hideId).classList.add('hidden');
+            document.getElementById(showId).classList.remove('hidden');
+        }
+
+        // --- 3. IMPACT (PLAY BOOM AUDIO) ---
+        function goPhase3() {
+            switchPhase('p2', 'p3');
+            let count = 3;
+            const el = document.getElementById('impact-count');
+            const int = setInterval(() => {
+                count--;
+                if (count > 0) {
+                    el.innerText = count;
+                } else {
+                    clearInterval(int);
+                    el.innerText = "BOOM!";
+                    
+                    // PLAY BOOM AUDIO
+                    document.getElementById('sfx-boom').play();
+
+                    confetti({ particleCount: 200, spread: 100 });
+                    setTimeout(() => switchPhase('p3', 'p4'), 2000); 
+                }
+            }, 1000);
+        }
+
+        // --- 4. GIFT ---
+        function openGift() {
+            confetti({ particleCount: 100, origin: { y: 0.6 } });
+            initMicrophone(); 
+            setTimeout(() => {
+                switchPhase('p4', 'p5'); 
+            }, 1000);
+        }
+
+        // --- 5. COMPLIMENTS LOGIC ---
+        const compliments = [
+            "Hadd se zyada kaleshi ho😒",
+            "Moti ho 🤰",
+            "Music taste ka to kya kehna mashallah😔",
+            "theek thak insaan ho tum😒",
+            "aaaj to badday h bhai ka🕺",
+            "chalo ek dhang ka- sahi si friend ho🤦"
+        ];
+        let clickCount = 0;
+        function showCompliment() {
+            confetti({ particleCount: 15, spread: 60, origin: { y: 0.5 }, colors: ['#ff6b6b', '#fff'] });
+            const textEl = document.getElementById('compliment-text');
+            const randomMsg = compliments[Math.floor(Math.random() * compliments.length)];
+            textEl.style.opacity = 0;
+            setTimeout(() => {
+                textEl.innerText = randomMsg;
+                textEl.style.opacity = 1;
+            }, 200);
+            clickCount++;
+            if (clickCount === 3) {
+                const btn = document.getElementById('next-level-btn');
+                btn.classList.remove('hidden'); btn.style.opacity = 1;
+            }
+        }
+        function goToCake() { switchPhase('p5', 'p6'); }
+
+        // --- MICROPHONE LOGIC ---
+        let audioContext, analyser, microphoneStream;
+        let isCandleOut = false;
+
+        async function initMicrophone() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                microphoneStream = stream;
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                analyser = audioContext.createAnalyser();
+                const microphone = audioContext.createMediaStreamSource(stream);
+                microphone.connect(analyser);
+                analyser.fftSize = 256;
+                detectBlow();
+            } catch (err) {
+                console.log("Mic denied");
+                document.getElementById('blow-instruction').innerText = "Mic access denied 😕\nClick the flame instead!";
+            }
+        }
+
+        function detectBlow() {
+            if(isCandleOut) return;
+            const cakeSection = document.getElementById('p6');
+            if(cakeSection.classList.contains('hidden')) {
+                requestAnimationFrame(detectBlow);
+                return;
+            }
+
+            const bufferLength = analyser.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
+            analyser.getByteFrequencyData(dataArray);
+            let sum = 0;
+            for(let i=0; i<bufferLength; i++) sum += dataArray[i];
+            let average = sum / bufferLength;
+            if (average > 45) { blowCandle(); }
+            else { requestAnimationFrame(detectBlow); }
+        }
+
+        // --- 6. CAKE & FINALE (AUDIO LOGIC) ---
+        function blowCandle() {
+            if(isCandleOut) return;
+            isCandleOut = true;
+            if (microphoneStream) microphoneStream.getTracks().forEach(track => track.stop());
+            
+            const flame = document.getElementById('flame');
+            flame.classList.add('out');
+            confetti({ particleCount: 300, spread: 100, colors: ['#ff6b6b', '#ffe66d', '#4ecdc4'] });
+            
+            // PLAY CHEER
+            const cheer = document.getElementById('sfx-cheer');
+            cheer.currentTime = 0;
+            cheer.play();
+
+            // STOP CHEER AFTER 6 SECONDS AND PLAY CAKE SONG
+            setTimeout(() => {
+                cheer.pause();
+                cheer.currentTime = 0; 
+                const music = document.getElementById('bg-music');
+                music.play();
+            }, 6000); // 6000ms = 6 seconds
+
+            setTimeout(() => {
+                switchPhase('p6', 'p7');
+                createBalloons(); fireFinale();
+            }, 2000);
+        }
+
+        // --- 7. FINALE ANIMATIONS ---
+        function createBalloons() {
+            const container = document.getElementById('balloons');
+            const colors = ['#ff6b6b', '#4ecdc4', '#ffe66d', '#ff9a9e'];
+            for(let i=0; i<30; i++) {
+                const b = document.createElement('div');
+                b.className = 'balloon';
+                b.style.left = Math.random() * 100 + '%';
+                b.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                b.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                container.appendChild(b);
+            }
+        }
+        function fireFinale() {
+            const end = Date.now() + 15 * 1000;
+            const colors = ['#ff6b6b', '#ffe66d', '#4ecdc4'];
+            (function frame() {
+                confetti({ particleCount: 2, angle: 60, spread: 55, origin: { x: 0 }, colors: colors });
+                confetti({ particleCount: 2, angle: 120, spread: 55, origin: { x: 1 }, colors: colors });
+                if (Date.now() < end) requestAnimationFrame(frame);
+            }());
+        }
+
+        // --- 8. COUPONS LOGIC ---
+        function showCoupons() { switchPhase('p7', 'p8'); }
+        
+        function toggleTicket(el) {
+            el.classList.toggle('selected');
+            
+            const selected = document.querySelectorAll('.ticket.selected');
+            const shareBtn = document.getElementById('share-btn');
+            
+            if (selected.length > 0) {
+                shareBtn.classList.remove('hidden');
+                confetti({ particleCount: 15, spread: 40, origin: { y: 0.8 } });
+            } else {
+                shareBtn.classList.add('hidden');
+            }
+        }
+
+        function generateShareImage() {
+            const captureArea = document.getElementById('capture-area');
+            const container = document.getElementById('selected-tickets-container');
+            container.innerHTML = ''; 
+
+            const selectedTickets = document.querySelectorAll('.ticket.selected');
+            selectedTickets.forEach(ticket => {
+                const clone = ticket.cloneNode(true);
+                clone.style.transform = 'none'; 
+                clone.style.boxShadow = 'none';
+                clone.style.border = '2px solid #4ecdc4';
+                container.appendChild(clone);
+            });
+
+            html2canvas(captureArea).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'my-birthday-wishes.png';
+                link.href = canvas.toDataURL();
+                link.click();
+                alert("Image saved! Send it to me 💖");
+            });
+        }
+
+        // --- 9. HAPPY BIRTHDAY AGAIN ---
+        function goFinalPage() {
+            switchPhase('p8', 'p9');
+            confettiActive = true;
+            var end = Date.now() + (999 * 1000); 
+            (function frame() {
+                if(!confettiActive) return; 
+                confetti({
+                    particleCount: 1,
+                    angle: 60, spread: 55, origin: { x: 0 },
+                    colors: ['#fff', '#ffd1dc'],
+                    drift: 1
+                });
+                confetti({
+                    particleCount: 1,
+                    angle: 120, spread: 55, origin: { x: 1 },
+                    colors: ['#fff', '#ffd1dc'],
+                    drift: 1
+                });
+                if (Date.now() < end) { requestAnimationFrame(frame); }
+            }());
+        }
+
+        // --- REPLAY LOGIC ---
+        function replayExperience() {
+            confettiActive = false; 
+            
+            document.getElementById('p9').classList.add('hidden');
+            document.getElementById('p2').classList.remove('hidden');
+
+            // Reset Music: Stop everything
+            document.getElementById('bg-music').pause();
+            document.getElementById('bg-music').currentTime = 0;
+            
+            // Reset Cheer just in case
+            document.getElementById('sfx-cheer').pause();
+            document.getElementById('sfx-cheer').currentTime = 0;
+
+            clickCount = 0;
+            document.getElementById('next-level-btn').classList.add('hidden');
+            document.getElementById('compliment-text').innerText = "";
+            document.getElementById('compliment-text').style.opacity = 0;
+
+            isCandleOut = false;
+            document.getElementById('flame').classList.remove('out');
+            document.getElementById('balloons').innerHTML = ''; 
+
+            const selectedTickets = document.querySelectorAll('.ticket.selected');
+            selectedTickets.forEach(t => t.classList.remove('selected'));
+            document.getElementById('share-btn').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>

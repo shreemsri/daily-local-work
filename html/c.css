@@ -1,0 +1,40 @@
+.container{
+    height: 850px;
+    width: 700px;
+    background-color: blue;
+    display: grid;
+    grid-template-rows: 130px 130px 130px 130px;
+    grid-template-columns: 130px 130px 130px 130px;
+    row-gap: 50px;
+    column-gap: 50px;
+    justify-self: center;
+    place-items: center center;
+}
+.item{
+    height: 70px;
+    width: 70px;
+    background-color: black;
+    margin: 10px;
+}
+#i1{    
+    grid-column-start: 1;
+    grid-column-end: 3;
+    justify-self: center;
+
+}
+#i3{
+    justify-self: center;
+    align-self: center;
+
+}
+#i5{
+    align-self: center;
+    justify-self: end;
+}
+#i4{
+    grid-column-start: 2;
+    grid-column-end: 4;
+    justify-self: end;
+    align-self: center;
+
+}
