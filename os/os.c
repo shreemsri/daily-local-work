@@ -3,7 +3,7 @@
 int main() {
     int n, i, j;
     int at[20], bt[20], wt[20], tat[20], ct[20], rt[20], pid[20], temp;
-    float avg_wt = 0, avg_tat = 0;
+    float avg_bt = 0, avg_wt = 0, avg_tat = 0, avg_ct = 0, avg_rt = 0;
 
     printf("Enter number of processes: ");
     scanf("%d", &n);
@@ -49,12 +49,18 @@ int main() {
         wt[i] = tat[i] - bt[i];
         rt[i] = wt[i];
 
+        avg_bt += bt[i];
         avg_wt += wt[i];
         avg_tat += tat[i];
+        avg_ct += ct[i];
+        avg_rt += rt[i];
     }
 
+    avg_bt /= n;
     avg_wt /= n;
     avg_tat /= n;
+    avg_ct /= n;
+    avg_rt /= n;
 
     printf("\nPID\tAT\tBT\tCT\tTAT\tWT\tRT\n");
     for (i = 0; i < n; i++) {
@@ -62,8 +68,12 @@ int main() {
                pid[i], at[i], bt[i], ct[i], tat[i], wt[i], rt[i]);
     }
 
-    printf("\nAverage Waiting Time = %.2f", avg_wt);
-    printf("\nAverage Turnaround Time = %.2f\n", avg_tat);
+    printf("\nAverage Burst Time       = %.2f", avg_bt);
+    printf("\nAverage Completion Time  = %.2f", avg_ct);
+    printf("\nAverage Turnaround Time  = %.2f", avg_tat);
+    printf("\nAverage Waiting Time     = %.2f", avg_wt);
+    printf("\nAverage Response Time    = %.2f\n", avg_rt);
 
     return 0;
+    //sd
 }
