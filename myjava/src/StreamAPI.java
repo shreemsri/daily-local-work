@@ -14,7 +14,8 @@ public class StreamAPI {
         for(int a: list){
             if(a%2==0){
                  System.out.println(a);
-            }
+            } 
+        
             
         }
     }

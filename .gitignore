@@ -1,2 +1,16 @@
 .vscode/
 .DS_Store/
+.git/
+node_modules/
+dist/
+build/
+coverage/
+.env
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*.swn
+*.swn
+*.swn       
